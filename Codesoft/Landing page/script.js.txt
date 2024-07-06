@@ -1,0 +1,24 @@
+// scripts.js
+
+// Function to smooth scroll to a section
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Function to handle the "Register Now" button click
+function registerNow() {
+    alert('Thank you for your interest in becoming an organ donor! You will be redirected to the registration page.');
+    window.location.href = 'https://www.organdonor.gov/sign-up';
+}
+
+// Add smooth scrolling for nav links
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});

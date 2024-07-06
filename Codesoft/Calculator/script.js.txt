@@ -1,0 +1,60 @@
+let display = document.getElementById('display');
+let currentInput = '';
+let firstOperand = null;
+let secondOperand = null;
+let currentOperation = null;
+let shouldResetDisplay = false;
+
+function appendNumber(number) {
+    if (shouldResetDisplay) {
+        resetDisplay();
+    }
+    display.textContent += number;
+}
+
+function setOperation(operator) {
+    if (currentOperation !== null) {
+        calculateResult();
+    }
+    firstOperand = display.textContent;
+    currentOperation = operator;
+    shouldResetDisplay = true;
+}
+
+function calculateResult() {
+    if (currentOperation === null || shouldResetDisplay) return;
+    secondOperand = display.textContent;
+    display.textContent = operate(currentOperation, firstOperand, secondOperand);
+    currentOperation = null;
+}
+
+function operate(operator, a, b) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+    switch (operator) {
+        case '+':
+            return a + b;
+        case '-':
+            return a - b;
+        case '*':
+            return a * b;
+        case '/':
+            if (b === 0) return 'Error';
+            return a / b;
+        default:
+            return null;
+    }
+}
+
+function clearDisplay() {
+    display.textContent = '';
+    currentInput = '';
+    firstOperand = null;
+    secondOperand = null;
+    currentOperation = null;
+}
+
+function resetDisplay() {
+    display.textContent = '';
+    shouldResetDisplay = false;
+}
